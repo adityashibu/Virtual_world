@@ -4,6 +4,7 @@ class Graph {
         this.segments = segments;
     }
 
+    // For checking duplicate points
     addPoint(point) {
         this.points.push(point);
     }
@@ -21,8 +22,22 @@ class Graph {
         }
     }
 
+    // For checking duplicate segments
     addSegment(seg) {
         this.segments.push(seg);
+    }
+
+    containsSegment(seg) {
+        return this.segments.find((s) => s.equals(seg));
+    }
+
+    tryAddSegment(seg) {
+        if (!this.containsSegment) {
+            this.addSegment(seg);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     draw(ctx) {
