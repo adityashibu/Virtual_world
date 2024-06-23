@@ -16,7 +16,7 @@ class Point {
     /* FUNCTION
     Function to draw the point on the canvas, with the specified size (default 18) and color (default black)
     */
-    draw(ctx, size = 18, color = "black") {
+    draw(ctx, { size = 18, color = "black", outline = false } = {}) {
         // Define the radius of the point, which would be half of the size of the point
         const rad = size / 2;
         // Begin drawing the point
@@ -27,5 +27,18 @@ class Point {
         ctx.arc(this.x, this.y, rad, 0, Math.PI * 2);
         // Fill the point with the specified color
         ctx.fill();
+        // If there is an outline parameter specified, then draw an outline for the point
+        if (outline) {
+            // Begin drawing the outline
+            ctx.beginPath();
+            // Set line width to 2
+            ctx.lineWidth = 2;
+            // Set the stroke style to black
+            ctx.strokeStyle = "yellow";
+            // Draw a new arc to create an outline for the point
+            ctx.arc(this.x, this.y, rad * 0.5, 0, Math.PI * 2);
+            // Stroke the outline with the specified color
+            ctx.stroke();
+        }
     }
 }
