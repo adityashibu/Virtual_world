@@ -15,7 +15,6 @@ class Graph {
         // Push the point into the points array
         this.points.push(point);
     }
-
     /* FUNCTION
     Function to try to add a point to the graph to make sure no duplicates are added
     */
@@ -27,7 +26,6 @@ class Graph {
         }
         return false;
     }
-
     /* FUNCTION
     Function to check if a point with the same coordinates already exists in the array
     */
@@ -47,7 +45,23 @@ class Graph {
         // Push the segment into the segments array
         this.segments.push(seg);
     }
-
+    /* FUNCTION
+    Function to try to add a segment to the graph to make sure no duplicates are added
+    */
+    tryAddSegment(seg) {
+        if (!this.containsSegment(seg)) {
+            this.addSegment(seg);
+            return true;
+        }
+        return false;
+    }
+    /* FUNCTION
+    Function to try to add a segment to the graph to make sure no duplicates are added
+    */
+    containsSegment(seg) {
+        // Loop through each segment s and check if it is equal to the segment passed in
+        return this.segments.find((s) => s.equals(seg));
+    }
 
 
     /*************************************************************

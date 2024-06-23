@@ -6,6 +6,15 @@ class Segment {
     }
 
     /* FUNCTION
+    Function to check if the given segment is the same as another segment
+    */
+    equals(seg) {
+        // This would only be true if the x and y coordinates of the points are equal
+        return (this.p1.equals(seg.p1) && this.p2.equals(seg.p2)) ||
+            (this.p1.equals(seg.p2) && this.p2.equals(seg.p1))
+    }
+
+    /* FUNCTION
     Function to draw the segment on canvas with the specified width and color
     */
     draw(ctx, width = 2, color = "black") {

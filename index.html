@@ -26,15 +26,20 @@
                 // Get an index of a random point from the graph
                 const index1 = Math.floor(Math.random() * graph.points.length);
                 const index2 = Math.floor(Math.random() * graph.points.length);
+                let success = false;
 
-                // Then add a new segment between the points at index1 and index2
-                graph.addSegment(
-                    new Segment(graph.points[index1], graph.points[index2])
-                );
+                // If two indexes are not the same then add a segment (This is to avoid adding a segment from a point to itself)
+                if (index1 != index2) {
+                    // Then add a new segment between the points at index1 and index2 and store the result of that operation in the variable called success
+                    success = graph.tryAddSegment(
+                        new Segment(graph.points[index1], graph.points[index2])
+                    );
+                }
                 // To see the new point after it was added, we need to clear the canvas
                 ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
                 // After clearing the canvas, we need to redraw the graph with the new point
                 graph.draw(ctx);
+                console.log(success);
             }
 
             /* FUNCTION
