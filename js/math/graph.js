@@ -5,8 +5,11 @@ class Graph {
         this.segments = segments;
     }
 
+    /*************************************************************
+    * Points Implementation
+    ************************************************************/
     /* FUNCTION
-    Function to add a point to the graph
+    Function to add a point to the points array
     */
     addPoint(point) {
         // Push the point into the points array
@@ -33,6 +36,23 @@ class Graph {
         return this.points.find((p) => p.equals(point));
     }
 
+
+    /*************************************************************
+    * Segments Implementation
+    ************************************************************/
+    /* FUNCTION
+    Function to add a segment to the segments array
+    */
+    addSegment(seg) {
+        // Push the segment into the segments array
+        this.segments.push(seg);
+    }
+
+
+
+    /*************************************************************
+    * Visualization Implementation
+    ************************************************************/
     /* FUNCTION
     Function to draw the graph on the canvas
     */
