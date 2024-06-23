@@ -118,4 +118,11 @@ class Graph {
             point.draw(ctx);
         }
     }
+    /* FUNCTION
+    Function to clear the canvas
+    */
+    clear() {
+        this.points.length = 0;
+        this.segments.length = 0;
+    }
 }
