@@ -38,7 +38,7 @@
                 console.log(success);
             }
             /* FUNCTION
-            Function to try to remove a random segment to the graph
+            Function to try to remove a random segment from the graph
             */
            function removeRandomSegment() {
                 // Check to see if there are any segments in the first place to remove
@@ -73,6 +73,24 @@
                 graph.draw(ctx);
                 console.log(success);
             }
+            /* FUNCTION
+            Function to try to remove a random point from the graph
+            */
+           function removeRandomPoint() {
+                // Check to see if there are any points in the first place to remove
+                if (graph.points.length == 0) {
+                    console.log("No points to remove");
+                    return;
+                }
+                // Else get a random index for the point to be removed
+                const index = Math.floor(Math.random() * graph.points.length);
+                graph.removePoint(graph.points[index]);
+
+                // To see the new point after it was added, we need to clear the canvas
+                ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+                // After clearing the canvas, we need to redraw the graph with the new point
+                graph.draw(ctx);
+           }
 
 
             myCanvas.width = 600;

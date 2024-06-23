@@ -16,6 +16,13 @@ class Graph {
         this.points.push(point);
     }
     /* FUNCTION
+    Function to remove a point from the points array
+    */
+    removePoint(point) {
+        // Remove 1 element from the index of the given segment, which would be the segment itself
+        this.points.splice(this.points.indexOf(point), 1);
+    }
+    /* FUNCTION
     Function to try to add a point to the graph to make sure no duplicates are added
     */
     tryAddPoint(point) {
