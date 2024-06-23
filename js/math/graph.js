@@ -46,6 +46,13 @@ class Graph {
         this.segments.push(seg);
     }
     /* FUNCTION
+    Function to remove a segment from the segments array
+    */
+    removeSegment(seg) {
+        // Remove 1 element from the index of the given segment, which would be the segment itself
+        this.segments.splice(this.segments.indexOf(seg), 1);
+    }
+    /* FUNCTION
     Function to try to add a segment to the graph to make sure no duplicates are added
     */
     tryAddSegment(seg) {
