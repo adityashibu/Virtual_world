@@ -10,8 +10,15 @@ class Segment {
     */
     equals(seg) {
         // This would only be true if the x and y coordinates of the points are equal
-        return (this.p1.equals(seg.p1) && this.p2.equals(seg.p2)) ||
-            (this.p1.equals(seg.p2) && this.p2.equals(seg.p1))
+        return this.includes(seg.p1) && this.includes(seg.p2);
+    }
+
+    /* FUNCTION
+    Function to check if the given segment has a point that is the same as another point
+    */
+    includes(point) {
+        // return true if this segment includes a point that is the same as p1 or p2
+        return this.p1.equals(point) || this.p2.equals(point);
     }
 
     /* FUNCTION
