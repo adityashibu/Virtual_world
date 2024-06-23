@@ -6,6 +6,7 @@ class GraphEditor {
         this.ctx = this.canvas.getContext("2d");
 
         this.selected = null;
+        this.hovered = null;
 
         this.#addEventListeners();
     }
@@ -18,6 +19,13 @@ class GraphEditor {
         this.canvas.addEventListener("mousedown", (evt) => {
             // On mouse down, store the coordinates of the mouse click to create a new point
             const mouse = new Point(evt.offsetX, evt.offsetY);
+            // Get the point that is closest to the mouse click
+            this.hovered = getNearestPoint(mouse, this.graph.points);
+            // If the point is already selected then deselect, else select it
+            if (this.hovered) {
+                this.selected = this.hovered;
+                return;
+            }
             // Now add a point at those coordinates
             this.graph.addPoint(mouse);
             // Set it as selected point
