@@ -19,6 +19,13 @@ class Graph {
     Function to remove a point from the points array
     */
     removePoint(point) {
+        // Get all the segments that the point is a part of
+        const segments = this.getSegmentsWithPoint(point);
+        // Loop through each segment and remove it from the segments array
+        for (const seg of segments) {
+            this.removeSegment(seg);
+        }
+
         // Remove 1 element from the index of the given segment, which would be the segment itself
         this.points.splice(this.points.indexOf(point), 1);
     }
@@ -76,6 +83,21 @@ class Graph {
     containsSegment(seg) {
         // Loop through each segment s and check if it is equal to the segment passed in
         return this.segments.find((s) => s.equals(seg));
+    }
+    /* FUNCTION
+    Function to get all the segments that a point is a part of
+    */
+    getSegmentsWithPoint(point) {
+        // Create an empty array to store the segments that include the point
+        const segments = [];
+        // Loop through each segment and check if it includes the point, if it does then push it to the empty array
+        for (const seg of this.segments) {
+            if (seg.includes(point)) {
+                segments.push(seg);
+            }
+        }
+        // return the array of segments that include the point
+        return segments;
     }
 
 
