@@ -13,6 +13,14 @@ class Graph {
         this.points.push(point);
     }
 
+    /* FUNCTION
+    Function to check if a point with the same coordinates already exists in the array
+    */
+    containsPoint(point) {
+        // Loop through each point p and check if it is equal to the point passed in
+        return this.points.find((p) => p.equals(point));
+    }
+
     draw(ctx) {
         // Loop through the segments array and draw it out
         for (const seg of this.segments) {
