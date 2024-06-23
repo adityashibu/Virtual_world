@@ -19,7 +19,8 @@
         <script src="js/primitives/segment.js"></script>
         <script>
             function addRandomPoint() {
-                graph.addPoint(
+                // Try to add a point to the graph making sure there are no duplicates and then store the boolean result in a variable called success
+                const success = graph.tryAddPoint(
                     new Point(
                         Math.random() * myCanvas.width,
                         Math.random() * myCanvas.height
@@ -29,6 +30,7 @@
                 ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
                 // After clearing the canvas, we need to redraw the graph with the new point
                 graph.draw(ctx);
+                console.log(success);
             }
 
 

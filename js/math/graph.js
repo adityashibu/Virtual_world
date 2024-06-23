@@ -14,6 +14,18 @@ class Graph {
     }
 
     /* FUNCTION
+    Function to try to add a point to the graph to make sure no duplicates are added
+    */
+    tryAddPoint(point) {
+        // If this point is not already in the array, then add the point to the graph
+        if (!this.containsPoint(point)) {
+            this.addPoint(point);
+            return true;
+        }
+        return false;
+    }
+
+    /* FUNCTION
     Function to check if a point with the same coordinates already exists in the array
     */
     containsPoint(point) {
