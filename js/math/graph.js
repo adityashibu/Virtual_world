@@ -8,15 +8,15 @@ class Graph {
     /*************************************************************
     * Points Implementation
     ************************************************************/
-    /* FUNCTION
-    Function to add a point to the points array
+    /* METHOD
+    Method to add a point to the points array
     */
     addPoint(point) {
         // Push the point into the points array
         this.points.push(point);
     }
-    /* FUNCTION
-    Function to remove a point from the points array
+    /* METHOD
+    Method to remove a point from the points array
     */
     removePoint(point) {
         // Get all the segments that the point is a part of
@@ -29,8 +29,8 @@ class Graph {
         // Remove 1 element from the index of the given segment, which would be the segment itself
         this.points.splice(this.points.indexOf(point), 1);
     }
-    /* FUNCTION
-    Function to try to add a point to the graph to make sure no duplicates are added
+    /* METHOD
+    Method to try to add a point to the graph to make sure no duplicates are added
     */
     tryAddPoint(point) {
         // If this point is not already in the array, then add the point to the graph
@@ -40,8 +40,8 @@ class Graph {
         }
         return false;
     }
-    /* FUNCTION
-    Function to check if a point with the same coordinates already exists in the array
+    /* METHOD
+    Method to check if a point with the same coordinates already exists in the array
     */
     containsPoint(point) {
         // Loop through each point p and check if it is equal to the point passed in
@@ -52,22 +52,22 @@ class Graph {
     /*************************************************************
     * Segments Implementation
     ************************************************************/
-    /* FUNCTION
-    Function to add a segment to the segments array
+    /* METHOD
+    Method to add a segment to the segments array
     */
     addSegment(seg) {
         // Push the segment into the segments array
         this.segments.push(seg);
     }
-    /* FUNCTION
-    Function to remove a segment from the segments array
+    /* METHOD
+    Method to remove a segment from the segments array
     */
     removeSegment(seg) {
         // Remove 1 element from the index of the given segment, which would be the segment itself
         this.segments.splice(this.segments.indexOf(seg), 1);
     }
-    /* FUNCTION
-    Function to try to add a segment to the graph to make sure no duplicates are added
+    /* METHOD
+    Method to try to add a segment to the graph to make sure no duplicates are added
     */
     tryAddSegment(seg) {
         // If this segment is not already in the array, add it to the segments array and check if the points it's connecting are not the same to make sure it doesn't connect a point with itself
@@ -77,15 +77,15 @@ class Graph {
         }
         return false;
     }
-    /* FUNCTION
-    Function to try to add a segment to the graph to make sure no duplicates are added
+    /* METHOD
+    Method to try to add a segment to the graph to make sure no duplicates are added
     */
     containsSegment(seg) {
         // Loop through each segment s and check if it is equal to the segment passed in
         return this.segments.find((s) => s.equals(seg));
     }
-    /* FUNCTION
-    Function to get all the segments that a point is a part of
+    /* METHOD
+    Method to get all the segments that a point is a part of
     */
     getSegmentsWithPoint(point) {
         // Create an empty array to store the segments that include the point
@@ -104,8 +104,8 @@ class Graph {
     /*************************************************************
     * Visualization Implementation
     ************************************************************/
-    /* FUNCTION
-    Function to draw the graph on the canvas
+    /* METHOD
+    Method to draw the graph on the canvas
     */
     draw(ctx) {
         // Loop through the segments array and draw it out
@@ -118,8 +118,8 @@ class Graph {
             point.draw(ctx);
         }
     }
-    /* FUNCTION
-    Function to clear the canvas
+    /* METHOD
+    Method to clear the canvas
     */
     clear() {
         this.points.length = 0;

@@ -5,18 +5,18 @@ class Point {
         this.y = y;
     }
 
-    /* FUNCTION
-    Function to check if the given point is the same as another point
+    /* METHOD
+    Method to check if the given point is the same as another point
     */
     equals(point) {
         // This would only be true if the x and y coordinates of the points are equal
         return this.x == point.x && this.y == point.y;
     }
 
-    /* FUNCTION
-    Function to draw the point on the canvas, with the specified size (default 18) and color (default black)
+    /* METHOD
+    Method to draw the point on the canvas, with the specified size (default 18) and color (default black)
     */
-    draw(ctx, { size = 18, color = "black", outline = false } = {}) {
+    draw(ctx, { size = 18, color = "black", outline = false, fill = false } = {}) {
         // Define the radius of the point, which would be half of the size of the point
         const rad = size / 2;
         // Begin drawing the point
@@ -39,6 +39,16 @@ class Point {
             ctx.arc(this.x, this.y, rad * 0.5, 0, Math.PI * 2);
             // Stroke the outline with the specified color
             ctx.stroke();
+        }
+        if (fill) {
+            // Begin drawing the outline
+            ctx.beginPath();
+            // Draw a new arc to create an outline for the point
+            ctx.arc(this.x, this.y, rad * 0.6, 0, Math.PI * 2);
+            // Set the fill style to yellow
+            ctx.fillStyle = "yellow";
+            // Fill the outline with the specified color
+            ctx.fill();
         }
     }
 }

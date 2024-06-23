@@ -11,33 +11,70 @@ class GraphEditor {
         this.#addEventListeners();
     }
 
-    /* FUNCTION
-    Private function to add event listeners to the canvas
+    /* METHOD
+    Private method to add event listeners to the canvas
     */
     #addEventListeners() {
+        /* EVENT
+        Listener to remove or add point from the graph when clicked
+        */
         // Add event listener to listen for a mouse down event
         this.canvas.addEventListener("mousedown", (evt) => {
+            // REMOVE POINT
+            // Check if the right click was pressed
+            if (evt.button == 2) {
+                if (this.hovered) {
+                    this.#removePoint(this.hovered);
+                }
+            }
+
+            // ADD POINT
+            if (evt.button == 0) {
+                // On mouse down, store the coordinates of the mouse click to create a new point
+                const mouse = new Point(evt.offsetX, evt.offsetY);
+                // If the point is already selected then deselect, else select it
+                if (this.hovered) {
+                    this.selected = this.hovered;
+                    return;
+                }
+                // Now add a point at those coordinates
+                this.graph.addPoint(mouse);
+                // Set it as selected point
+                this.selected = mouse;
+            }
+        });
+
+        /* EVENT
+        Listener to get the nearest point to the mouse click
+        */
+        // Add event listener to listen for a mouse move event
+        this.canvas.addEventListener("mousemove", (evt) => {
             // On mouse down, store the coordinates of the mouse click to create a new point
             const mouse = new Point(evt.offsetX, evt.offsetY);
             // Get the point that is closest to the mouse click
             this.hovered = getNearestPoint(mouse, this.graph.points, 15);
-            // If the point is already selected then deselect, else select it
-            if (this.hovered) {
-                this.selected = this.hovered;
-                return;
-            }
-            // Now add a point at those coordinates
-            this.graph.addPoint(mouse);
-            // Set it as selected point
-            this.selected = mouse;
+
         });
+
+        /* EVENT
+        Listener to check if the context menu has opened
+        */
+        // Add event listener to listen for a mouse move event, in which case the context menu should not open
+        this.canvas.addEventListener("contextmenu", (evt) => evt.preventDefault());
     }
 
-    /* FUNCTION
-    Function to display the graph editor
+    #removePoint()
+
+    /* METHOD
+    Method to display the graph editor
     */
     display() {
         this.graph.draw(this.ctx);
+        // If there is a hovered point, draw it with a fill
+        if (this.hovered) {
+            this.hovered.draw(this.ctx, { fill: true });
+        }
+        // If there is a selected point, draw it with an outline
         if (this.selected) {
             this.selected.draw(this.ctx, { outline: true });
         }
