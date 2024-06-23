@@ -1,4 +1,4 @@
-function getNearestPoint(loc, points) {
+function getNearestPoint(loc, points, threshold = 15) {
     // Look for min distance
     // Initialize minDist to the maximum possible value
     let minDist = Number.MAX_SAFE_INTEGER;
@@ -9,8 +9,8 @@ function getNearestPoint(loc, points) {
     for (const point of points) {
         // Calculate the distance between the current point and the location
         const dist = distance(point, loc);
-        // If the distance is less than the minimum distance, then update the minimum distance and the nearest point
-        if (dist < minDist) {
+        // If the distance is less than the minimum distance, then update the minimum distance and the nearest point and make sure the click is within the threshold 
+        if (dist < minDist && dist < threshold) {
             minDist = dist;
             nearest = point;
         }
