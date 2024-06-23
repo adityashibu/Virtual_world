@@ -20,7 +20,7 @@ class GraphEditor {
             // On mouse down, store the coordinates of the mouse click to create a new point
             const mouse = new Point(evt.offsetX, evt.offsetY);
             // Get the point that is closest to the mouse click
-            this.hovered = getNearestPoint(mouse, this.graph.points);
+            this.hovered = getNearestPoint(mouse, this.graph.points, 15);
             // If the point is already selected then deselect, else select it
             if (this.hovered) {
                 this.selected = this.hovered;

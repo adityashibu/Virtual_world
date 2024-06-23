@@ -1,5 +1,5 @@
-function getNearestPoint(loc, points, threshold = 15) {
-    // Look for min distance
+// Look for min distance
+function getNearestPoint(loc, points, threshold = Number.MAX_VALUE) {
     // Initialize minDist to the maximum possible value
     let minDist = Number.MAX_SAFE_INTEGER;
     // Initialize the nearest point to null
