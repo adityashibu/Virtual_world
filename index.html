@@ -11,101 +11,13 @@
         <h1>World Editor</h1>
         <canvas id="myCanvas"></canvas>
         <div id="controls">
-            <button onclick="addRandomPoint()">Add Point</button>
-            <button onclick="removeRandomPoint()">Remove Point</button>
-            <button onclick="addRandomSegment()">Add Segment</button>
-            <button onclick="removeRandomSegment()">Remove Segment</button>
-            <button onclick="removeAll()">Clear Canvas</button>
+            
         </div>
 
         <script src="js/math/graph.js"></script>
         <script src="js/primitives/point.js"></script>
         <script src="js/primitives/segment.js"></script>
         <script>
-            /* FUNCTION
-            Function to try to add a random segment to the graph
-            */
-            function addRandomSegment() {
-                // Get an index of a random point from the graph
-                const index1 = Math.floor(Math.random() * graph.points.length);
-                const index2 = Math.floor(Math.random() * graph.points.length);
-                const success = graph.tryAddSegment(
-                    new Segment(graph.points[index1], graph.points[index2])
-                );
-                // To see the new point after it was added, we need to clear the canvas
-                ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
-                // After clearing the canvas, we need to redraw the graph with the new point
-                graph.draw(ctx);
-                console.log(success);
-            }
-            /* FUNCTION
-            Function to try to remove a random segment from the graph
-            */
-           function removeRandomSegment() {
-                // Check to see if there are any segments in the first place to remove
-                if (graph.segments.length == 0) {
-                    console.log("No segments to remove");
-                    return;
-                }
-                // Else get a random index for the segment to be removed
-                const index = Math.floor(Math.random() * graph.segments.length);
-                graph.removeSegment(graph.segments[index]);
-           
-                // To see the new point after it was added, we need to clear the canvas
-                ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
-                // After clearing the canvas, we need to redraw the graph with the new point
-                graph.draw(ctx);
-            }
-
-            /* FUNCTION
-            Function to try to add a random point to the graph
-            */
-            function addRandomPoint() {
-                // Try to add a point to the graph making sure there are no duplicates and then store the boolean result in a variable called success
-                const success = graph.tryAddPoint(
-                    new Point(
-                        Math.random() * myCanvas.width,
-                        Math.random() * myCanvas.height
-                    )
-                );
-                // To see the new point after it was added, we need to clear the canvas
-                ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
-                // After clearing the canvas, we need to redraw the graph with the new point
-                graph.draw(ctx);
-                console.log(success);
-            }
-            /* FUNCTION
-            Function to try to remove a random point from the graph
-            */
-           function removeRandomPoint() {
-                // Check to see if there are any points in the first place to remove
-                if (graph.points.length == 0) {
-                    console.log("No points to remove");
-                    return;
-                }
-                // Else get a random index for the point to be removed
-                const index = Math.floor(Math.random() * graph.points.length);
-                graph.removePoint(graph.points[index]);
-
-                // To see the new point after it was added, we need to clear the canvas
-                ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
-                // After clearing the canvas, we need to redraw the graph with the new point
-                graph.draw(ctx);
-           }
-           /* FUNCTION
-            Function to clear the canvas
-            */
-           function removeAll() {
-                // Call the clear method on the graph object
-                graph.clear();
-
-                // To see the new point after it was added, we need to clear the canvas
-                ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
-                // After clearing the canvas, we need to redraw the graph with the new point
-                graph.draw(ctx);
-           }
-
-
             myCanvas.width = 600;
             myCanvas.height = 600;
 
