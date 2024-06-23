@@ -49,7 +49,8 @@ class Graph {
     Function to try to add a segment to the graph to make sure no duplicates are added
     */
     tryAddSegment(seg) {
-        if (!this.containsSegment(seg)) {
+        // If this segment is not already in the array, add it to the segments array and check if the points it's connecting are not the same to make sure it doesn't connect a point with itself
+        if (!this.containsSegment(seg) && !seg.p1.equals(seg.p2)) {
             this.addSegment(seg);
             return true;
         }
