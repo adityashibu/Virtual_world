@@ -63,7 +63,14 @@ class GraphEditor {
         this.canvas.addEventListener("contextmenu", (evt) => evt.preventDefault());
     }
 
-    #removePoint()
+    /* METHOD
+    Private method to remove a point (separate to account for point removal from segments)
+    */
+    #removePoint(point) {
+        this.graph.removePoint(point);
+        this.hovered = null;
+        this.selected = null;
+    }
 
     /* METHOD
     Method to display the graph editor
