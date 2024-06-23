@@ -21,6 +21,9 @@ class Graph {
         return this.points.find((p) => p.equals(point));
     }
 
+    /* FUNCTION
+    Function to draw the graph on the canvas
+    */
     draw(ctx) {
         // Loop through the segments array and draw it out
         for (const seg of this.segments) {

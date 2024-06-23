@@ -5,7 +5,17 @@ class Point {
         this.y = y;
     }
 
-    // Draw the point on the canvas, with the specified size (default 18) and color (default black)
+    /* FUNCTION
+    Function to check if the given point is the same as another point
+    */
+    equals(point) {
+        // This would only be true if the x and y coordinates of the points are equal
+        return this.x == point.x && this.y == point.y;
+    }
+
+    /* FUNCTION
+    Function to draw the point on the canvas, with the specified size (default 18) and color (default black)
+    */
     draw(ctx, size = 18, color = "black") {
         // Define the radius of the point, which would be half of the size of the point
         const rad = size / 2;

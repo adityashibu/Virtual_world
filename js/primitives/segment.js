@@ -5,7 +5,9 @@ class Segment {
         this.p2 = p2;
     }
 
-    // Draw the segment on canvas with the specified width and color
+    /* FUNCTION
+    Function to draw the segment on canvas with the specified width and color
+    */
     draw(ctx, width = 2, color = "black") {
         // Start drawing the segment
         ctx.beginPath();
