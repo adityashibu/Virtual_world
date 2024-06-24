@@ -7,6 +7,7 @@ class GraphEditor {
 
         this.selected = null;
         this.hovered = null;
+        this.dragging = false;
 
         this.#addEventListeners();
     }
@@ -35,6 +36,8 @@ class GraphEditor {
                 // If the point is already selected then deselect, else select it
                 if (this.hovered) {
                     this.selected = this.hovered;
+                    // If left clicked on a point, then allow dragging the point to reposition it
+                    this.dragging = true;
                     return;
                 }
                 // Now add a point at those coordinates
@@ -55,7 +58,11 @@ class GraphEditor {
             const mouse = new Point(evt.offsetX, evt.offsetY);
             // Get the point that is closest to the mouse click
             this.hovered = getNearestPoint(mouse, this.graph.points, 15);
-
+            // If dragging is true, then update the selected point to the mouse coordinates
+            if (this.dragging == true) {
+                this.selected.x = mouse.x;
+                this.selected.y = mouse.y;
+            }
         });
 
         /* EVENT
@@ -63,6 +70,12 @@ class GraphEditor {
         */
         // Add event listener to listen for a mouse move event, in which case the context menu should not open
         this.canvas.addEventListener("contextmenu", (evt) => evt.preventDefault());
+
+        /* EVENT
+        Listener to check if the mouse has been released
+        */
+        // Add event listener to listen for a mouse move event, in which case the context menu should not open
+        this.canvas.addEventListener("mouseup", () => this.dragging = false);
     }
 
     /* METHOD
