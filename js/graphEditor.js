@@ -20,55 +20,14 @@ class GraphEditor {
         /* EVENT
         Listener to remove or add point from the graph when clicked
         */
-        // Add event listener to listen for a mouse down event
-        this.canvas.addEventListener("mousedown", (evt) => {
-            // REMOVE POINT
-            // Check if the right click was pressed
-            if (evt.button == 2) {
-                /// If the point is already selected then unselect it
-                if (this.selected) {
-                    this.selected = null;
-                }
-                // If the point is hovered, then remove it
-                else if (this.hovered) {
-                    this.#removePoint(this.hovered);
-                }
-            }
-
-            // ADD POINT
-            if (evt.button == 0) {
-                // If the point is already selected then deselect, else select it
-                if (this.hovered) {
-                    // If there is a selected point, then add a segment between the selected point and the hovered point
-                    this.#select(this.hovered);
-                    // If left clicked on a point, then allow dragging the point to reposition it
-                    this.dragging = true;
-                    return;
-                }
-                // Now add a point at those coordinates
-                this.graph.addPoint(this.mouse);
-                // If there was a previously selected point, then add a segment between the selected point and the new point
-                this.#select(this.mouse);
-                // Set it as the hovered point
-                this.hovered = this.mouse;
-            }
-        });
+        // Add event listener to listen for a mouse down event, using bind to pass the context of the class
+        this.canvas.addEventListener("mousedown", this.#handleMouseDown.bind(this));
 
         /* EVENT
         Listener to get the nearest point to the mouse click
         */
         // Add event listener to listen for a mouse move event
-        this.canvas.addEventListener("mousemove", (evt) => {
-            // On mouse down, store the coordinates of the mouse click to create a new point
-            this.mouse = new Point(evt.offsetX, evt.offsetY);
-            // Get the point that is closest to the mouse click
-            this.hovered = getNearestPoint(this.mouse, this.graph.points, 15);
-            // If dragging is true, then update the selected point to the mouse coordinates
-            if (this.dragging == true) {
-                this.selected.x = this.mouse.x;
-                this.selected.y = this.mouse.y;
-            }
-        });
+        this.canvas.addEventListener("mousemove", this.#handleMoveMove.bind(this));
 
         /* EVENT
         Listener to check if the context menu has opened
@@ -81,6 +40,57 @@ class GraphEditor {
         */
         // Add event listener to listen for a mouse move event, in which case the context menu should not open
         this.canvas.addEventListener("mouseup", () => this.dragging = false);
+    }
+
+    /* METHOD
+    Private method to handle a mouse down event
+    */
+    #handleMouseDown(evt) {
+        // REMOVE POINT
+        // Check if the right click was pressed
+        if (evt.button == 2) {
+            /// If the point is already selected then unselect it
+            if (this.selected) {
+                this.selected = null;
+            }
+            // If the point is hovered, then remove it
+            else if (this.hovered) {
+                this.#removePoint(this.hovered);
+            }
+        }
+
+        // ADD POINT
+        if (evt.button == 0) {
+            // If the point is already selected then deselect, else select it
+            if (this.hovered) {
+                // If there is a selected point, then add a segment between the selected point and the hovered point
+                this.#select(this.hovered);
+                // If left clicked on a point, then allow dragging the point to reposition it
+                this.dragging = true;
+                return;
+            }
+            // Now add a point at those coordinates
+            this.graph.addPoint(this.mouse);
+            // If there was a previously selected point, then add a segment between the selected point and the new point
+            this.#select(this.mouse);
+            // Set it as the hovered point
+            this.hovered = this.mouse;
+        }
+    }
+
+    /* METHOD
+    Private method to handle a mouse move event
+    */
+    #handleMoveMove(evt) {
+        // On mouse down, store the coordinates of the mouse click to create a new point
+        this.mouse = new Point(evt.offsetX, evt.offsetY);
+        // Get the point that is closest to the mouse click
+        this.hovered = getNearestPoint(this.mouse, this.graph.points, 15);
+        // If dragging is true, then update the selected point to the mouse coordinates
+        if (this.dragging == true) {
+            this.selected.x = this.mouse.x;
+            this.selected.y = this.mouse.y;
+        }
     }
 
     /* METHOD
