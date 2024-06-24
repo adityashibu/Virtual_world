@@ -22,20 +22,28 @@ class Segment {
     }
 
     /* METHOD
-    Method to draw the segment on canvas with the specified width and color
+    Method to draw the segment on canvas with the specified width, color and design
     */
-    draw(ctx, width = 2, color = "black") {
+    draw(ctx, { width = 2, color = "black", dash = [] } = {}) {
         // Start drawing the segment
         ctx.beginPath();
         // Set the line width to the specified width
         ctx.lineWidth = width;
-        // Set the stroke style to the specified color
-        ctx.strokeStyle = color;
+        // Set the stroke style to the specified color if the segment is not a dash, else set it to yellow
+        if (dash.length != 0) {
+            ctx.strokeStyle = "yellow";
+        } else {
+            ctx.strokeStyle = color;
+        }
+        // Set dash pattern for the line
+        ctx.setLineDash(dash);
         // Move the pen to the first point
         ctx.moveTo(this.p1.x, this.p1.y);
         // Draw a line to the second point
         ctx.lineTo(this.p2.x, this.p2.y);
         // Stroke the line with the specified color
         ctx.stroke();
+        // Set line dash back to default
+        ctx.setLineDash([]);
     }
 }

@@ -116,7 +116,7 @@ class GraphEditor {
         if (this.selected) {
             const intent = this.hovered ? this.hovered : this.mouse;
             // If there is a selected point, then draw a segment between the selected point and the mouse
-            new Segment(this.selected, intent).draw(ctx);
+            new Segment(this.selected, intent).draw(ctx, { dash: [3, 3] });
             this.selected.draw(this.ctx, { outline: true });
         }
     }
