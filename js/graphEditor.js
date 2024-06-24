@@ -25,11 +25,13 @@ class GraphEditor {
             // REMOVE POINT
             // Check if the right click was pressed
             if (evt.button == 2) {
-                if (this.hovered) {
-                    this.#removePoint(this.hovered);
-                } else {
-                    // If there is a selected point, then deselect it by clicking on the canvas
+                /// If the point is already selected then unselect it
+                if (this.selected) {
                     this.selected = null;
+                }
+                // If the point is hovered, then remove it
+                else if (this.hovered) {
+                    this.#removePoint(this.hovered);
                 }
             }
 
