@@ -8,6 +8,7 @@ class GraphEditor {
         this.selected = null;
         this.hovered = null;
         this.dragging = false;
+        this.mouse = null;
 
         this.#addEventListeners();
     }
@@ -34,8 +35,6 @@ class GraphEditor {
 
             // ADD POINT
             if (evt.button == 0) {
-                // On mouse down, store the coordinates of the mouse click to create a new point
-                const mouse = new Point(evt.offsetX, evt.offsetY);
                 // If the point is already selected then deselect, else select it
                 if (this.hovered) {
                     // If there is a selected point, then add a segment between the selected point and the hovered point
@@ -45,11 +44,11 @@ class GraphEditor {
                     return;
                 }
                 // Now add a point at those coordinates
-                this.graph.addPoint(mouse);
+                this.graph.addPoint(this.mouse);
                 // If there was a previously selected point, then add a segment between the selected point and the new point
-                this.#select(mouse);
+                this.#select(this.mouse);
                 // Set it as the hovered point
-                this.hovered = mouse;
+                this.hovered = this.mouse;
             }
         });
 
@@ -59,13 +58,13 @@ class GraphEditor {
         // Add event listener to listen for a mouse move event
         this.canvas.addEventListener("mousemove", (evt) => {
             // On mouse down, store the coordinates of the mouse click to create a new point
-            const mouse = new Point(evt.offsetX, evt.offsetY);
+            this.mouse = new Point(evt.offsetX, evt.offsetY);
             // Get the point that is closest to the mouse click
-            this.hovered = getNearestPoint(mouse, this.graph.points, 15);
+            this.hovered = getNearestPoint(this.mouse, this.graph.points, 15);
             // If dragging is true, then update the selected point to the mouse coordinates
             if (this.dragging == true) {
-                this.selected.x = mouse.x;
-                this.selected.y = mouse.y;
+                this.selected.x = this.mouse.x;
+                this.selected.y = this.mouse.y;
             }
         });
 
@@ -115,6 +114,9 @@ class GraphEditor {
         }
         // If there is a selected point, draw it with an outline
         if (this.selected) {
+            const intent = this.hovered ? this.hovered : this.mouse;
+            // If there is a selected point, then draw a segment between the selected point and the mouse
+            new Segment(this.selected, intent).draw(ctx);
             this.selected.draw(this.ctx, { outline: true });
         }
     }
