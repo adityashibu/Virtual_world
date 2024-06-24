@@ -26,6 +26,9 @@ class GraphEditor {
             if (evt.button == 2) {
                 if (this.hovered) {
                     this.#removePoint(this.hovered);
+                } else {
+                    // If there is a selected point, then deselect it by clicking on the canvas
+                    this.selected = null;
                 }
             }
 
@@ -36,10 +39,7 @@ class GraphEditor {
                 // If the point is already selected then deselect, else select it
                 if (this.hovered) {
                     // If there is a selected point, then add a segment between the selected point and the hovered point
-                    if (this.selected) {
-                        this.graph.tryAddSegment(new Segment(this.selected, this.hovered))
-                    }
-                    this.selected = this.hovered;
+                    this.#select(this.hovered);
                     // If left clicked on a point, then allow dragging the point to reposition it
                     this.dragging = true;
                     return;
@@ -47,11 +47,7 @@ class GraphEditor {
                 // Now add a point at those coordinates
                 this.graph.addPoint(mouse);
                 // If there was a previously selected point, then add a segment between the selected point and the new point
-                if (this.selected) {
-                    this.graph.tryAddSegment(new Segment(this.selected, mouse))
-                }
-                // Set it as selected point
-                this.selected = mouse;
+                this.#select(mouse);
                 // Set it as the hovered point
                 this.hovered = mouse;
             }
@@ -84,6 +80,16 @@ class GraphEditor {
         */
         // Add event listener to listen for a mouse move event, in which case the context menu should not open
         this.canvas.addEventListener("mouseup", () => this.dragging = false);
+    }
+
+    /* METHOD
+    Private method to select a point
+    */
+    #select(point) {
+        if (this.selected) {
+            this.graph.tryAddSegment(new Segment(this.selected, point))
+        }
+        this.selected = point;
     }
 
     /* METHOD
