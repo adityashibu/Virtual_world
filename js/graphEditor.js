@@ -1,6 +1,7 @@
 class GraphEditor {
-    constructor(canvas, graph) {
-        this.canvas = canvas;
+    constructor(viewport, graph) {
+        this.viewport = viewport;
+        this.canvas = viewport.canvas;
         this.graph = graph;
 
         this.ctx = this.canvas.getContext("2d");
@@ -83,7 +84,7 @@ class GraphEditor {
     */
     #handleMoveMove(evt) {
         // On mouse down, store the coordinates of the mouse click to create a new point
-        this.mouse = new Point(evt.offsetX, evt.offsetY);
+        this.mouse = this.viewport.getMouse(evt);
         // Get the point that is closest to the mouse click
         this.hovered = getNearestPoint(this.mouse, this.graph.points, 15);
         // If dragging is true, then update the selected point to the mouse coordinates
