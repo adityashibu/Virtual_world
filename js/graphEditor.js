@@ -41,6 +41,8 @@ class GraphEditor {
                 this.graph.addPoint(mouse);
                 // Set it as selected point
                 this.selected = mouse;
+                // Set it as the hovered point
+                this.hovered = mouse;
             }
         });
 
@@ -69,7 +71,10 @@ class GraphEditor {
     #removePoint(point) {
         this.graph.removePoint(point);
         this.hovered = null;
-        this.selected = null;
+        // If the selected point is the same as the point to be removed, then deselect it
+        if (this.selected == point) {
+            this.selected = null;
+        }
     }
 
     /* METHOD
