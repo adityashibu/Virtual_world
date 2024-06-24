@@ -86,7 +86,7 @@ class GraphEditor {
         // On mouse down, store the coordinates of the mouse click to create a new point
         this.mouse = this.viewport.getMouse(evt);
         // Get the point that is closest to the mouse click
-        this.hovered = getNearestPoint(this.mouse, this.graph.points, 15);
+        this.hovered = getNearestPoint(this.mouse, this.graph.points, 15 * this.viewport.zoom);
         // If dragging is true, then update the selected point to the mouse coordinates
         if (this.dragging == true) {
             this.selected.x = this.mouse.x;
