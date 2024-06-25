@@ -27,6 +27,13 @@ class ViewPort {
     }
 
     /* METHOD
+    Private method to get offset information
+    */
+    getOffset(evt) {
+        return add(this.offset, this.drag.offset);
+    }
+
+    /* METHOD
     Private method to add event listeners to the canvas
     */
     #addEventListeners() {
