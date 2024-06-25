@@ -23,3 +23,13 @@ function distance(p1, p2) {
     // Use the Pythagorean theorem to calculate the distance between two points
     return Math.hypot(p1.x - p2.x, p1.y - p2.y);
 }
+
+// Function to add vectors
+function add(p1, p2) {
+    return new Point(p1.x + p2.x, p1.y + p2.y);
+}
+
+// Function to subtract vectors
+function subtract(p1, p2) {
+    return new Point(p1.x - p2.x, p1.y - p2.y);
+}
