@@ -9,20 +9,14 @@ class Graph {
     Method to handling the loading of graph from locally stored JSON Data
     */
     static load(info) {
-        // Create an empty array to store the points
-        const points = [];
+        // Assign the points array to the points in the JSON data by using map to create a new point object for each point in the JSON data
+        const points = info.points.map((i) => new Point(i.x, i.y));
         // Create an empty array to store the segments
-        const segments = [];
-        // For each pointInfo in the points in the JSON data
-        for (const pointInfo of info.points) {
-            // Create and push a new point with the coordinates of JSON data.x and JSON data.y
-            points.push(new Point(pointInfo.x, pointInfo.y));
-        }
-
-        // Similarly for each segmentInfo in the segments in the JSON data
-        for (const segInfo of info.segments) {
-            segments.push(new Segment(segInfo.p1, segInfo.p2));
-        }
+        const segments = info.segments.map((i) => new Segment(
+            // Assign the segments array to the segments in the JSON data by using map to create a new segment object for each segment in the JSON data
+            points.find((p) => p.equals(i.p1)),
+            points.find((p) => p.equals(i.p2))
+        ));
         return new Graph(points, segments);
     }
 
