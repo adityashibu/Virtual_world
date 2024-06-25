@@ -22,8 +22,9 @@ class ViewPort {
     */
     getMouse(evt) {
         return new Point(
-            evt.offsetX * this.zoom,
-            evt.offsetY * this.zoom,
+            // Get the x and y coordinates of the mouse and scale them based on the zoom and offset, considering the center of the canvas
+            (evt.offsetX - this.center.x) * this.zoom - this.offset.x,
+            (evt.offsetY - this.center.y) * this.zoom - this.offset.y,
         )
     }
 
