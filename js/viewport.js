@@ -20,12 +20,14 @@ class ViewPort {
     /* METHOD
     Private method to get mouse information
     */
-    getMouse(evt) {
-        return new Point(
+    getMouse(evt, subtractDragOffSet = false) {
+        const p = new Point(
             // Get the x and y coordinates of the mouse and scale them based on the zoom and offset, considering the center of the canvas
             (evt.offsetX - this.center.x) * this.zoom - this.offset.x,
             (evt.offsetY - this.center.y) * this.zoom - this.offset.y,
-        )
+        );
+        // If subtractDragOffSet is true, then subtract the offset of the drag
+        return subtractDragOffSet ? subtract(p, this.drag.offset) : p;
     }
 
     /* METHOD
