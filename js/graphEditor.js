@@ -117,6 +117,15 @@ class GraphEditor {
     }
 
     /* METHOD
+    Method to handle the disposing of the points and segments on the graph editor
+    */
+    dispose() {
+        this.graph.clear();
+        this.selected = null;
+        this.hovered = null;
+    }
+
+    /* METHOD
     Method to display the graph editor
     */
     display() {

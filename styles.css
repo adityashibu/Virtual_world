@@ -11,3 +11,11 @@ h1 {
 #myCanvas {
     background-color: #2a5;
 }
+
+#controls {
+    padding: 10px;
+}
+
+#controlsButton {
+    padding: 5px;
+}

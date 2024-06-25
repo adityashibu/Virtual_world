@@ -5,6 +5,27 @@ class Graph {
         this.segments = segments;
     }
 
+    /* METHOD
+    Method to handling the loading of graph from locally stored JSON Data
+    */
+    static load(info) {
+        // Create an empty array to store the points
+        const points = [];
+        // Create an empty array to store the segments
+        const segments = [];
+        // For each pointInfo in the points in the JSON data
+        for (const pointInfo of info.points) {
+            // Create and push a new point with the coordinates of JSON data.x and JSON data.y
+            points.push(new Point(pointInfo.x, pointInfo.y));
+        }
+
+        // Similarly for each segmentInfo in the segments in the JSON data
+        for (const segInfo of info.segments) {
+            segments.push(new Segment(segInfo.p1, segInfo.p2));
+        }
+        return new Graph(points, segments);
+    }
+
     /*************************************************************
     * Points Implementation
     ************************************************************/
