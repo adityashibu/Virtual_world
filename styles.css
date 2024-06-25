@@ -9,7 +9,8 @@ h1 {
 }
 
 #myCanvas {
-    background-color: #2a5;
+    background: rgb(34, 170, 85);
+    background: radial-gradient(circle, rgba(34, 170, 85, 1) 0%, rgba(47, 170, 34, 1) 100%);
 }
 
 #controls {
