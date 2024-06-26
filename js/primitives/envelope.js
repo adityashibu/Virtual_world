@@ -25,6 +25,15 @@ class Envelope {
         const p2_cw = translate(p2, alpha_cw, radius);
         const p1_cw = translate(p1, alpha_cw, radius);
 
+        // Create a step to create the envelope
+        const step = Math.PI / 3;
+        // Define an empty array to store the points
+        const points = []
+        // Iterate over the angles to create the envelope
+        for (let i = alpha_ccw; i <= alpha_cw; i += step) {
+            points.push(translate(p1, i, radius));
+        }
+
         return new Polygon([p1_ccw, p2_ccw, p2_cw, p1_cw]);
     }
 
