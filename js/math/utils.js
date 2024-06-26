@@ -38,3 +38,16 @@ function subtract(p1, p2) {
 function scale(p, scalar) {
     return new Point(p.x * scalar, p.y * scalar);
 }
+
+// Function to translate a point by a distance and an angle
+function translate(loc, angle, offset) {
+    return new Point(
+        loc.x + Math.cos(angle) * offset,
+        loc.y + Math.sin(angle) * offset
+    );
+}
+
+// Calculate angle between two points
+function angle(p) {
+    return Math.atan2(p.y, p.x);
+}
