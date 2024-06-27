@@ -1,13 +1,13 @@
 class Envelope {
-    constructor(skeleton, width) {
+    constructor(skeleton, width, roundness = 1) {
         this.skeleton = skeleton;
-        this.poly = this.#generatePolygon(width);
+        this.poly = this.#generatePolygon(width, roundness);
     }
 
     /* METHOD
     Private method to create a polygon around the skeleton
     */
-    #generatePolygon(width) {
+    #generatePolygon(width, roundness) {
         const { p1, p2 } = this.skeleton;
 
         // Get the radius of the envelope
@@ -19,22 +19,23 @@ class Envelope {
         // Get the points that are radius distance away from the skeleton in the counter clockwise direction
         const alpha_ccw = alpha - Math.PI / 2;
 
-        // Define some test points
-        const p1_ccw = translate(p1, alpha_ccw, radius);
-        const p2_ccw = translate(p2, alpha_ccw, radius);
-        const p2_cw = translate(p2, alpha_cw, radius);
-        const p1_cw = translate(p1, alpha_cw, radius);
 
-        // Create a step to create the envelope
-        const step = Math.PI / 3;
         // Define an empty array to store the points
         const points = []
+        // Create a step to create the envelope
+        const step = Math.PI / Math.max(1, roundness);
+        // Create an epsilon to avoid floating point errors
+        const eps = step / 2;
         // Iterate over the angles to create the envelope
-        for (let i = alpha_ccw; i <= alpha_cw; i += step) {
+        for (let i = alpha_ccw; i <= alpha_cw + eps; i += step) {
             points.push(translate(p1, i, radius));
         }
+        // Iterate over the angles to create the envelope, but this time for p2
+        for (let i = alpha_ccw; i <= alpha_cw + eps; i += step) {
+            points.push(translate(p2, Math.PI + i, radius));
+        }
 
-        return new Polygon([p1_ccw, p2_ccw, p2_cw, p1_cw]);
+        return new Polygon(points);
     }
 
     /* METHOD
