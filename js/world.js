@@ -34,7 +34,7 @@ class World {
     /* METHOD
     Method to draw out the world on the canvas
     */
-    draw() {
+    draw(ctx) {
         // Iterate over the envelopes to draw them
         for (const env of this.envelopes) {
             env.draw(ctx);
