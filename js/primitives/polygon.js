@@ -10,6 +10,38 @@ class Polygon {
     }
 
     /* METHOD
+    Static method that take two polygons and returns the intersection of the two polygons
+    */
+    static break(poly1, poly2) {
+        // Get the segments of the polygons
+        const segs1 = poly1.segments;
+        const segs2 = poly2.segments;
+        // Define an empty array to store the intersections
+        const intersections = [];
+
+        // Iterate over the segments of the first polygon
+        for (let i = 0; i < segs1.length; i++) {
+            // Iterate over the segments of the second polygon
+            for (let j = 0; j < segs2.length; j++) {
+                // Get the intersection of the two segments
+                const int = getIntersection(
+                    segs[i].p1, segs[i].p2, segs2[j].p1, segs2[j].p2
+                );
+
+                // If the intersection is not null and the offset is not 0 or 1
+                if (int && int.offset != 1 && int.offset != 0) {
+                    // Create a new Point at that intersection
+                    const point = new PointerEvent(int.x, int.y);
+                    // Push the point to the intersections array
+                    intersections.push(point);
+                }
+            }
+        }
+
+        return intersections;
+    }
+
+    /* METHOD
     Method to draw the polygon on canvas with the specified width, color and design
     */
     draw(ctx, { stroke = "blue", lineWidth = 2, fill = "rgba(0, 0, 255, 0.3)" } = {}) {
