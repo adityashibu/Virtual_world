@@ -80,3 +80,9 @@ function getIntersection(A, B, C, D) {
 function lerp(a, b, t) {
     return a + (b - a) * t;
 }
+
+// Function to get a random color
+function getRandomColor() {
+    const hue = 290 + Math.random() * 260;
+    return "hsl(" + hue + ", 100%, 60%)";
+}

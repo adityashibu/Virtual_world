@@ -54,6 +54,16 @@ class Polygon {
     }
 
     /* METHOD
+    Method to draw the segments separately on the canvas
+    */
+    drawSegments(ctx) {
+        // Loop through each segment and draw it
+        for (const seg of this.segments) {
+            seg.draw(ctx, { color: getRandomColor(), width: 5 });
+        }
+    }
+
+    /* METHOD
     Method to draw the polygon on canvas with the specified width, color and design
     */
     draw(ctx, { stroke = "blue", lineWidth = 2, fill = "rgba(0, 0, 255, 0.3)" } = {}) {
