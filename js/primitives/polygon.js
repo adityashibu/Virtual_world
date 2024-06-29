@@ -34,6 +34,18 @@ class Polygon {
                     const point = new Point(int.x, int.y);
                     // Push the point to the intersections array
                     intersections.push(point);
+                    // Keep reference to the segments that intersect
+                    let aux = segs1[i].p2;
+                    // Set the end of the segment to the intersection
+                    segs1[i].p2 = point;
+                    // Now draw a new segment from the intersection to the end of the segment
+                    segs1.splice(i + 1, 0, new Segment(point, aux));
+                    // Keep reference to the segments that intersect
+                    aux = segs2[j].p2;
+                    // Set the end of the segment to the intersection
+                    segs2[j].p2 = point;
+                    // Now draw a new segment from the intersection to the end of the segment
+                    segs2.splice(j + 1, 0, new Segment(point, aux));
                 }
             }
         }
