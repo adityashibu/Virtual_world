@@ -41,7 +41,7 @@ class World {
         }
         // Iterate over the intersections to draw them
         for (const int of this.intersections) {
-            int.draw(ctx);
+            int.draw(ctx, { color: "red", size: 10 });
         }
     }
 }

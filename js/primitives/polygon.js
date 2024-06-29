@@ -25,13 +25,13 @@ class Polygon {
             for (let j = 0; j < segs2.length; j++) {
                 // Get the intersection of the two segments
                 const int = getIntersection(
-                    segs[i].p1, segs[i].p2, segs2[j].p1, segs2[j].p2
+                    segs1[i].p1, segs1[i].p2, segs2[j].p1, segs2[j].p2
                 );
 
                 // If the intersection is not null and the offset is not 0 or 1
                 if (int && int.offset != 1 && int.offset != 0) {
                     // Create a new Point at that intersection
-                    const point = new PointerEvent(int.x, int.y);
+                    const point = new Point(int.x, int.y);
                     // Push the point to the intersections array
                     intersections.push(point);
                 }
